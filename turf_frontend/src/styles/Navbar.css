@@ -1,0 +1,137 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(26, 58, 92, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  z-index: 1000;
+}
+
+.navbar-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+  letter-spacing: 0.05em;
+}
+
+.navbar-logo:hover {
+  opacity: 0.9;
+}
+
+.logo-icon {
+  font-size: 2rem;
+  color: #ffd700;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 3rem;
+  align-items: center;
+}
+
+.nav-item {
+  margin: 0;
+}
+
+.nav-link {
+  padding: 0.5rem 0;
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  font-size: 1rem;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.nav-link:hover {
+  color: #9dff00;
+  border-bottom-color: #9dff00;
+}
+
+.nav-link.btn-primary {
+  background: #9dff00;
+  color: #0d2845;
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  border: none;
+}
+
+.nav-link.btn-primary:hover {
+  background: #8de600;
+  color: #0d2845;
+  border-bottom-color: transparent;
+}
+
+.nav-link.btn-logout {
+  background-color: rgba(255, 77, 77, 0.9);
+  color: white;
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  border: none;
+}
+
+.nav-link.btn-logout:hover {
+  background-color: rgba(255, 77, 77, 1);
+  border-bottom-color: transparent;
+}
+  color: white;
+}
+
+.nav-link.btn-logout:hover {
+  background-color: #dc2626;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-name {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .navbar-container {
+    height: 60px;
+    flex-wrap: wrap;
+  }
+
+  .nav-menu {
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  .nav-link {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+
+  .user-name {
+    display: none;
+  }
+}

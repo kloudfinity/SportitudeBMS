@@ -1,0 +1,202 @@
+.turf-details-page {
+  padding: 40px 0;
+}
+
+.turf-header {
+  background-color: var(--bg-white);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 40px;
+}
+
+.turf-image-large {
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+
+.turf-image-large img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.turf-info {
+  padding: 40px;
+}
+
+.turf-info h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.location {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.description {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 30px;
+}
+
+.amenities h3 {
+  font-size: 1.3rem;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.amenities-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Booking Section */
+.booking-section {
+  background-color: var(--bg-white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  padding: 40px;
+}
+
+.booking-section h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: var(--text-primary);
+}
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-select,
+.form-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+}
+
+.slots-section label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.slots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.slot-button {
+  padding: 16px;
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: var(--bg-white);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.slot-button:hover:not(.unavailable) {
+  border-color: var(--primary-color);
+  background-color: #eff6ff;
+}
+
+.slot-button.selected {
+  border-color: var(--primary-color);
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.slot-button.unavailable {
+  background-color: #f3f4f6;
+  border-color: #d1d5db;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.slot-time {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.slot-price {
+  font-size: 0.9rem;
+  color: var(--secondary-color);
+  font-weight: 600;
+}
+
+.slot-button.selected .slot-price {
+  color: white;
+}
+
+.slot-status {
+  font-size: 0.85rem;
+  color: var(--danger-color);
+  margin-top: 4px;
+}
+
+.no-slots {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-secondary);
+}
+
+.btn-book {
+  padding: 16px 32px;
+  font-size: 1.1rem;
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-book:hover:not(:disabled) {
+  background-color: #059669;
+}
+
+.btn-book:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .turf-image-large {
+    height: 250px;
+  }
+
+  .turf-info {
+    padding: 24px;
+  }
+
+  .turf-info h1 {
+    font-size: 2rem;
+  }
+
+  .booking-section {
+    padding: 24px;
+  }
+
+  .slots-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+}

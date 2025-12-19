@@ -1,0 +1,222 @@
+.home {
+  margin: 0;
+}
+
+/* Hero Section - Sportitude Design */
+.hero {
+  position: relative;
+  background: linear-gradient(135deg, #1a3a5c 0%, #0d2845 100%);
+  color: white;
+  padding: 180px 20px 120px;
+  text-align: left;
+  min-height: 650px;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(157, 255, 0, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(26, 58, 92, 0.8) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(13, 40, 69, 0.3);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.hero-title {
+  font-size: 4.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.hero-subtitle {
+  font-size: 1.125rem;
+  margin-bottom: 3rem;
+  opacity: 0.9;
+  line-height: 1.7;
+  max-width: 700px;
+  font-weight: 300;
+}
+
+.hero-features {
+  display: flex;
+  gap: 3.5rem;
+  margin-bottom: 3rem;
+  align-items: center;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.feature-icon {
+  width: 26px;
+  height: 26px;
+  stroke: white;
+  stroke-width: 2;
+  opacity: 0.9;
+}
+
+.btn-hero {
+  display: inline-block;
+  background: #9dff00;
+  color: #0d2845;
+  padding: 1.1rem 3.5rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border: 2px solid #9dff00;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(157, 255, 0, 0.3);
+  text-transform: none;
+}
+
+.btn-hero:hover {
+  background: #8de600;
+  border-color: #8de600;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(157, 255, 0, 0.4);
+}
+
+/* Cities Section */
+.cities-section {
+  background-color: var(--bg-white);
+}
+
+.cities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 24px;
+}
+
+.city-card {
+  background-color: var(--bg-white);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.city-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.city-image {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+}
+
+.city-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.city-name {
+  padding: 20px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--text-primary);
+}
+
+/* Featured Turfs Section */
+.featured-section {
+  background-color: var(--bg-light);
+}
+
+.turfs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+/* Features Section */
+.features-section {
+  background-color: var(--bg-white);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.feature-card {
+  text-align: center;
+  padding: 30px;
+  background-color: var(--bg-light);
+  border-radius: var(--border-radius);
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.feature-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.feature-card p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 60px 20px;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .cities-grid,
+  .turfs-grid,
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+}
