@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import Swal from 'sweetalert2';
 import AdminHeader from '../components/AdminHeader';
+import api from '../api/axios';
 
 const Turfs = ({ onLogout }) => {
   const [turfs, setTurfs] = useState([]);
@@ -26,11 +26,10 @@ const Turfs = ({ onLogout }) => {
 
   const fetchData = async () => {
     try {
-      const token = localStorage.getItem('adminToken');
       const [turfsRes, venuesRes, citiesRes] = await Promise.all([
-        axios.get('/api/turfs', { headers: { Authorization: `Bearer ${token}` } }),
-        axios.get('/api/venues', { headers: { Authorization: `Bearer ${token}` } }),
-        axios.get('/api/cities', { headers: { Authorization: `Bearer ${token}` } })
+        api.get('/api/turfs'),
+        api.get('/api/venues'),
+        api.get('/api/cities')
       ]);
       setTurfs(turfsRes.data.turfs);
       setVenues(venuesRes.data.venues);
@@ -48,7 +47,6 @@ const Turfs = ({ onLogout }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('adminToken');
 
     const submitData = {
       ...formData,
@@ -58,9 +56,7 @@ const Turfs = ({ onLogout }) => {
 
     try {
       if (editingTurf) {
-        await axios.put(`/api/turfs/${editingTurf._id}`, submitData, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        await api.put(`/api/turfs/${editingTurf._id}`, submitData);
         Swal.fire({
           icon: 'success',
           title: 'Success',
@@ -69,9 +65,7 @@ const Turfs = ({ onLogout }) => {
           showConfirmButton: false
         });
       } else {
-        await axios.post('/api/turfs', submitData, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        await api.post('/api/turfs', submitData);
         Swal.fire({
           icon: 'success',
           title: 'Success',
@@ -116,10 +110,7 @@ const Turfs = ({ onLogout }) => {
 
     if (result.isConfirmed) {
       try {
-        const token = localStorage.getItem('adminToken');
-        await axios.delete(`/api/turfs/${id}`, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        await api.delete(`/api/turfs/${id}`);
         Swal.fire({
           icon: 'success',
           title: 'Deleted',

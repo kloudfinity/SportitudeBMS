@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import Swal from 'sweetalert2';
+import api from '../api/axios';
 
 const Login = ({ onLogin }) => {
   const [formData, setFormData] = useState({
@@ -21,7 +21,7 @@ const Login = ({ onLogin }) => {
     setLoading(true);
 
     try {
-      const response = await axios.post('/api/admin/login', formData);
+      const response = await api.post('/api/admin/login', formData);
       
       if (response.data.token) {
         await Swal.fire({

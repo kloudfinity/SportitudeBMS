@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import Swal from 'sweetalert2';
 import AdminHeader from '../components/AdminHeader';
+import api from '../api/axios';
 
 const Slots = ({ onLogout }) => {
   const [slots, setSlots] = useState([]);
@@ -41,10 +41,9 @@ const Slots = ({ onLogout }) => {
 
   const fetchTurfs = async () => {
     try {
-      const token = localStorage.getItem('adminToken');
       const [turfsRes, venuesRes] = await Promise.all([
-        axios.get('/api/turfs', { headers: { Authorization: `Bearer ${token}` } }),
-        axios.get('/api/venues', { headers: { Authorization: `Bearer ${token}` } })
+        api.get('/api/turfs'),
+        api.get('/api/venues')
       ]);
       setTurfs(turfsRes.data.turfs);
       setVenues(venuesRes.data.venues);
@@ -62,10 +61,8 @@ const Slots = ({ onLogout }) => {
     
     setLoading(true);
     try {
-      const token = localStorage.getItem('adminToken');
-      const response = await axios.get('/api/slots', {
-        params: filters,
-        headers: { Authorization: `Bearer ${token}` }
+      const response = await api.get('/api/slots', {
+        params: filters
       });
       setSlots(response.data.slots);
     } catch (error) {
@@ -81,12 +78,9 @@ const Slots = ({ onLogout }) => {
 
   const handleGenerateSlots = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('adminToken');
 
     try {
-      const response = await axios.post('/api/slots/generate', generateForm, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const response = await api.post('/api/slots/generate', generateForm);
       
       Swal.fire({
         icon: 'success',
@@ -113,12 +107,9 @@ const Slots = ({ onLogout }) => {
 
   const handleUpdateSlot = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('adminToken');
 
     try {
-      await axios.put(`/api/slots/${editingSlot._id}`, editForm, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      await api.put(`/api/slots/${editingSlot._id}`, editForm);
       
       Swal.fire({
         icon: 'success',
@@ -152,10 +143,7 @@ const Slots = ({ onLogout }) => {
 
     if (result.isConfirmed) {
       try {
-        const token = localStorage.getItem('adminToken');
-        await axios.delete(`/api/slots/${id}`, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        await api.delete(`/api/slots/${id}`);
         
         Swal.fire({
           icon: 'success',

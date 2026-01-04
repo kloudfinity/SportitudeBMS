@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import Swal from 'sweetalert2';
 import AdminHeader from '../components/AdminHeader';
+import api from '../api/axios';
 
 const Venues = ({ onLogout }) => {
   const [venues, setVenues] = useState([]);
@@ -21,10 +21,9 @@ const Venues = ({ onLogout }) => {
 
   const fetchData = async () => {
     try {
-      const token = localStorage.getItem('adminToken');
       const [venuesRes, citiesRes] = await Promise.all([
-        axios.get('/api/venues', { headers: { Authorization: `Bearer ${token}` } }),
-        axios.get('/api/cities', { headers: { Authorization: `Bearer ${token}` } })
+        api.get('/api/venues'),
+        api.get('/api/cities')
       ]);
       setVenues(venuesRes.data.venues);
       setCities(citiesRes.data.cities);
@@ -41,13 +40,10 @@ const Venues = ({ onLogout }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('adminToken');
 
     try {
       if (editingVenue) {
-        await axios.put(`/api/venues/${editingVenue._id}`, formData, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        await api.put(`/api/venues/${editingVenue._id}`, formData);
         Swal.fire({
           icon: 'success',
           title: 'Success',
@@ -56,9 +52,7 @@ const Venues = ({ onLogout }) => {
           showConfirmButton: false
         });
       } else {
-        await axios.post('/api/venues', formData, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        await api.post('/api/venues', formData);
         Swal.fire({
           icon: 'success',
           title: 'Success',
@@ -101,10 +95,7 @@ const Venues = ({ onLogout }) => {
 
     if (result.isConfirmed) {
       try {
-        const token = localStorage.getItem('adminToken');
-        await axios.delete(`/api/venues/${id}`, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        await api.delete(`/api/venues/${id}`);
         Swal.fire({
           icon: 'success',
           title: 'Deleted',

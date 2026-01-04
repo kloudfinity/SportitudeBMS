@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import Swal from 'sweetalert2';
 import AdminHeader from '../components/AdminHeader';
+import api from '../api/axios';
 
 const Cities = ({ onLogout }) => {
   const [cities, setCities] = useState([]);
@@ -20,10 +20,7 @@ const Cities = ({ onLogout }) => {
 
   const fetchCities = async () => {
     try {
-      const token = localStorage.getItem('adminToken');
-      const response = await axios.get('/api/cities', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const response = await api.get('/api/cities');
       setCities(response.data.cities);
     } catch (error) {
       Swal.fire({
@@ -38,13 +35,10 @@ const Cities = ({ onLogout }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('adminToken');
 
     try {
       if (editingCity) {
-        await axios.put(`/api/cities/${editingCity._id}`, formData, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        await api.put(`/api/cities/${editingCity._id}`, formData);
         Swal.fire({
           icon: 'success',
           title: 'Success',
@@ -53,9 +47,7 @@ const Cities = ({ onLogout }) => {
           showConfirmButton: false
         });
       } else {
-        await axios.post('/api/cities', formData, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        await api.post('/api/cities', formData);
         Swal.fire({
           icon: 'success',
           title: 'Success',
@@ -98,10 +90,7 @@ const Cities = ({ onLogout }) => {
 
     if (result.isConfirmed) {
       try {
-        const token = localStorage.getItem('adminToken');
-        await axios.delete(`/api/cities/${id}`, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        await api.delete(`/api/cities/${id}`);
         Swal.fire({
           icon: 'success',
           title: 'Deleted',
