@@ -11,6 +11,24 @@ app.use(cors());
 // Serve static files for uploaded images
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
+// Root route
+app.get("/", (req, res) => {
+  res.status(200).json({ 
+    message: "Turf Booking System API", 
+    status: "running",
+    endpoints: {
+      health: "/api/health",
+      users: "/api/users",
+      admin: "/api/admin",
+      cities: "/api/cities",
+      venues: "/api/venues",
+      turfs: "/api/turfs",
+      slots: "/api/slots",
+      bookings: "/api/bookings"
+    }
+  });
+});
+
 // Health check
 app.get("/api/health", (req, res) => {
   res.status(200).json({ message: "Backend is running 🚀" });
