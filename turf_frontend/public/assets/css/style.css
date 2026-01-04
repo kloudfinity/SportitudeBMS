@@ -596,6 +596,9 @@ header .header-nav .navbar-nav li a.active {
 .book-court-section .court-form-area .booking-form-area .ground-part .time-slot-main .form-check input:checked[type=radio] + label {
   background-color: #08295E;
 }
+.book-court-section .court-form-area .booking-form-area .ground-part .time-slot-main .form-check input:checked[type=checkbox] + label {
+  background-color: #08295E;
+}
 .book-court-section .court-form-area .booking-form-area .ground-part .time-slot-main .form-check input:checked + label, .book-court-section .court-form-area .booking-form-area .ground-part .time-slot-main .form-check input:checked[type=radio] + label span {
   color: #fff;
 }

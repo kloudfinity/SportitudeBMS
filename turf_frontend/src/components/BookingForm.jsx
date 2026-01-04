@@ -8,7 +8,7 @@ const BookingForm = () => {
     city: 'Kolkata',
     venue: '',
     groundType: '',
-    timeSlot: ''
+    timeSlots: []
   });
 
   const games = [
@@ -33,8 +33,23 @@ const BookingForm = () => {
     '08:30 PM-09:30 PM'
   ];
 
+  const handleSlotToggle = (slot) => {
+    setFormData(prev => {
+      const isSelected = prev.timeSlots.includes(slot);
+      if (isSelected) {
+        return { ...prev, timeSlots: prev.timeSlots.filter(s => s !== slot) };
+      } else {
+        return { ...prev, timeSlots: [...prev.timeSlots, slot] };
+      }
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (formData.timeSlots.length === 0) {
+      alert('Please select at least one time slot');
+      return;
+    }
     setShowModal(true);
   };
 
@@ -174,11 +189,12 @@ const BookingForm = () => {
                           <div className="form-check" key={index}>
                             <input
                               className="form-check-input"
-                              type="radio"
+                              type="checkbox"
                               name="time_slot"
                               id={`slot-${index}`}
                               value={slot}
-                              onChange={(e) => setFormData({ ...formData, timeSlot: e.target.value })}
+                              checked={formData.timeSlots.includes(slot)}
+                              onChange={() => handleSlotToggle(slot)}
                             />
                             <label className="form-check-label" htmlFor={`slot-${index}`}>
                               {slot}

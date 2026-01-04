@@ -11,8 +11,8 @@ function HomePage() {
   return (
     <>
       <Banner />
-      <About />
       <BookingForm />
+      <About />
       <Gallery />
     </>
   );
