@@ -4,7 +4,7 @@ const Venue = require("../models/Venue");
 // Get all turfs
 exports.getAllTurfs = async (req, res) => {
   try {
-    const { venueId, sportType } = req.query;
+    const { venueId, sportType, city, search } = req.query;
     const filter = { isActive: true };
     
     if (venueId) {
@@ -15,12 +15,21 @@ exports.getAllTurfs = async (req, res) => {
       filter.sportType = sportType;
     }
 
-    const turfs = await Turf.find(filter)
+    if (search) {
+      filter.name = { $regex: search, $options: 'i' };
+    }
+
+    let turfs = await Turf.find(filter)
       .populate({
         path: "venue",
         populate: { path: "city", select: "name" }
       })
       .sort({ name: 1 });
+    
+    // Filter by city if provided
+    if (city) {
+      turfs = turfs.filter(turf => turf.venue?.city?._id?.toString() === city);
+    }
     
     res.json({ turfs });
   } catch (error) {
@@ -57,8 +66,7 @@ exports.createTurf = async (req, res) => {
       pricePerHour, 
       slotDurationMinutes,
       bufferMinutes,
-      amenities, 
-      images 
+      amenities
     } = req.body;
 
     // Verify venue exists
@@ -67,6 +75,12 @@ exports.createTurf = async (req, res) => {
       return res.status(404).json({ message: "Venue not found" });
     }
 
+    // Handle uploaded images
+    const images = req.files ? req.files.map(file => `/uploads/turfs/${file.filename}`) : [];
+
+    // Parse amenities if it's a string
+    const parsedAmenities = typeof amenities === 'string' ? amenities.split(',').map(a => a.trim()).filter(a => a) : amenities;
+
     const turf = await Turf.create({
       venue,
       name,
@@ -74,7 +88,7 @@ exports.createTurf = async (req, res) => {
       pricePerHour,
       slotDurationMinutes,
       bufferMinutes,
-      amenities,
+      amenities: parsedAmenities,
       images
     });
 
@@ -103,8 +117,8 @@ exports.updateTurf = async (req, res) => {
       pricePerHour,
       slotDurationMinutes,
       bufferMinutes, 
-      amenities, 
-      images, 
+      amenities,
+      existingImages, 
       isActive 
     } = req.body;
 
@@ -115,6 +129,16 @@ exports.updateTurf = async (req, res) => {
       }
     }
 
+    // Handle new uploaded images
+    const newImages = req.files ? req.files.map(file => `/uploads/turfs/${file.filename}`) : [];
+    
+    // Combine existing images with new images
+    const parsedExistingImages = existingImages ? (typeof existingImages === 'string' ? JSON.parse(existingImages) : existingImages) : [];
+    const allImages = [...parsedExistingImages, ...newImages];
+
+    // Parse amenities if it's a string
+    const parsedAmenities = typeof amenities === 'string' ? amenities.split(',').map(a => a.trim()).filter(a => a) : amenities;
+
     const turf = await Turf.findByIdAndUpdate(
       req.params.id,
       { 
@@ -124,8 +148,8 @@ exports.updateTurf = async (req, res) => {
         pricePerHour,
         slotDurationMinutes,
         bufferMinutes, 
-        amenities, 
-        images, 
+        amenities: parsedAmenities, 
+        images: allImages, 
         isActive 
       },
       { new: true }

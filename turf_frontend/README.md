@@ -1,70 +1,51 @@
-# Turf Booking System - Frontend
+# Sportitude - Turf Booking Frontend
 
-A modern React-based frontend application for the Turf Booking Management System.
+This is the React-based frontend for the Sportitude turf booking system, converted from the original HTML template.
 
 ## Features
 
-### User Features
-- 🏠 Browse and search turfs by city
-- 🔍 View detailed turf information
-- 📅 Real-time slot availability
-- 💳 Quick and easy booking process
-- 📱 User dashboard to manage bookings
-- 🔐 Secure authentication
-
-### Admin Features
-- 🏙️ City management
-- ⚽ Turf management
-- 🏟️ Venue management
-- ⏰ Slot management
-- 📊 Booking management and monitoring
+- **Modern React Application**: Built with React 18 and Vite for fast development
+- **Responsive Design**: Mobile-friendly layout using Bootstrap 5
+- **Interactive Components**: 
+  - Header with navigation
+  - Banner section with call-to-action
+  - About section with features
+  - Dynamic booking form with game selection
+  - Image gallery with lightbox (Fancybox)
+  - Footer with contact information
 
 ## Tech Stack
 
-- **React 18** - UI library
-- **React Router v6** - Client-side routing
-- **Axios** - HTTP client
-- **Vite** - Build tool and dev server
-- **CSS3** - Styling with custom CSS
-- **date-fns** - Date formatting
+- **React 18.2.0** - UI library
+- **Vite 5.0.8** - Build tool and dev server
+- **Bootstrap 5** - CSS framework
+- **jQuery** - For Bootstrap and plugin functionality
+- **Fancybox** - Gallery lightbox
+- **Font Awesome 6.6.0** - Icons
 
 ## Project Structure
 
 ```
 turf_frontend/
+├── public/
+│   └── assets/
+│       ├── css/          # Stylesheets
+│       ├── images/       # Images and icons
+│       ├── js/           # jQuery plugins
+│       └── webfonts/     # Font files
 ├── src/
-│   ├── components/          # Reusable components
-│   │   ├── Navbar.jsx
-│   │   ├── Footer.jsx
-│   │   ├── TurfCard.jsx
-│   │   ├── ProtectedRoute.jsx
-│   │   └── AdminRoute.jsx
-│   ├── pages/              # Page components
-│   │   ├── Home.jsx
-│   │   ├── Login.jsx
-│   │   ├── Register.jsx
-│   │   ├── TurfList.jsx
-│   │   ├── TurfDetails.jsx
-│   │   ├── MyBookings.jsx
-│   │   └── admin/          # Admin pages
-│   │       ├── AdminLogin.jsx
-│   │       ├── AdminDashboard.jsx
-│   │       ├── CityManagement.jsx
-│   │       ├── TurfManagement.jsx
-│   │       ├── VenueManagement.jsx
-│   │       ├── SlotManagement.jsx
-│   │       └── BookingManagement.jsx
-│   ├── context/            # React context
-│   │   └── AuthContext.jsx
-│   ├── services/           # API services
-│   │   ├── api.js
-│   │   └── apiService.js
-│   ├── styles/             # CSS files
-│   ├── App.jsx             # Main app component
-│   └── main.jsx            # Entry point
+│   ├── components/
+│   │   ├── Header.jsx
+│   │   ├── Banner.jsx
+│   │   ├── About.jsx
+│   │   ├── BookingForm.jsx
+│   │   ├── Gallery.jsx
+│   │   └── Footer.jsx
+│   ├── App.jsx
+│   └── main.jsx
 ├── index.html
-├── vite.config.js
-└── package.json
+├── package.json
+└── vite.config.js
 ```
 
 ## Getting Started
@@ -73,141 +54,90 @@ turf_frontend/
 
 - Node.js (v16 or higher)
 - npm or yarn
-- Backend server running on port 5000
 
 ### Installation
 
 1. Navigate to the frontend directory:
-```bash
-cd turf_frontend
-```
+   ```bash
+   cd turf_frontend
+   ```
 
 2. Install dependencies:
-```bash
-npm install
-```
+   ```bash
+   npm install
+   ```
 
-3. Create environment file (optional):
-```bash
-# Create .env file in root
-VITE_API_URL=http://localhost:5000/api
-```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-4. Start the development server:
-```bash
-npm run dev
-```
+4. Open your browser and visit:
+   ```
+   http://localhost:3000
+   ```
 
-The application will be available at `http://localhost:3000`
+### Available Scripts
 
-### Build for Production
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+
+## Components
+
+### Header
+Navigation bar with logo, menu items, and contact button.
+
+### Banner
+Hero section with main call-to-action and key features.
+
+### About
+Information about Sportitude with feature highlights.
+
+### BookingForm
+Interactive booking form with:
+- Game selection (Football, Cricket, Pickleball, Paintball)
+- Date, city, and venue selection
+- Ground type selection (Half/Full)
+- Time slot selection
+- Booking modal for personal information
+
+### Gallery
+Image gallery with Fancybox lightbox integration.
+
+### Footer
+Footer with logo, contact information, and social media links.
+
+## Customization
+
+### Styling
+All styles are located in `/public/assets/css/style.css`. The original SCSS file is also available at `/public/assets/css/style.scss`.
+
+### Images
+Replace images in `/public/assets/images/` with your own:
+- `logo.png` - Header logo
+- `footer-logo.png` - Footer logo
+- `banner.jpg` - Banner background
+- `gallery*.jpg` - Gallery images
+- Game icons (`g1.png`, `g2.png`, etc.)
+
+### Configuration
+Modify `vite.config.js` to change:
+- Development server port (default: 3000)
+- API proxy settings (default: http://localhost:5000)
+
+## Integration with Backend
+
+The frontend is configured to proxy API requests to `http://localhost:5000`. Update the proxy settings in `vite.config.js` if your backend runs on a different port.
+
+## Building for Production
 
 ```bash
 npm run build
 ```
 
-The production build will be in the `dist` folder.
-
-### Preview Production Build
-
-```bash
-npm run preview
-```
-
-## API Configuration
-
-The frontend communicates with the backend API. By default, it uses:
-- Development: `http://localhost:5000/api`
-- Can be configured via `VITE_API_URL` environment variable
-
-## Authentication
-
-The app uses JWT token-based authentication:
-- Tokens are stored in localStorage
-- Automatic token injection in API requests
-- Auto-redirect on 401 errors
-- Separate auth flows for users and admins
-
-## Routes
-
-### Public Routes
-- `/` - Home page
-- `/login` - User login
-- `/register` - User registration
-- `/turfs` - Browse turfs
-- `/turfs/:id` - Turf details
-
-### Protected User Routes
-- `/my-bookings` - User's booking history
-
-### Admin Routes
-- `/admin/login` - Admin login
-- `/admin/dashboard` - Admin dashboard
-- `/admin/cities` - City management
-- `/admin/turfs` - Turf management
-- `/admin/venues` - Venue management
-- `/admin/slots` - Slot management
-- `/admin/bookings` - Booking management
-
-## Features in Detail
-
-### User Booking Flow
-1. Browse turfs by city or search
-2. View turf details and available venues
-3. Select date and venue
-4. Choose available time slot
-5. Confirm booking
-6. View booking in dashboard
-
-### Admin Management
-- Full CRUD operations for all entities
-- Real-time booking status updates
-- Responsive data tables
-- Modal-based forms for editing
-
-## Responsive Design
-
-The application is fully responsive and works on:
-- Desktop (1200px+)
-- Tablet (768px - 1199px)
-- Mobile (< 768px)
-
-## Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-
-## Development Notes
-
-- Uses Vite for fast HMR (Hot Module Replacement)
-- Proxy configured for API requests in development
-- CSS custom properties for theming
-- Modular component architecture
-
-## Troubleshooting
-
-### Port already in use
-If port 3000 is busy, Vite will automatically use the next available port.
-
-### API Connection Issues
-Ensure the backend server is running on port 5000, or update the proxy configuration in `vite.config.js`.
-
-### Build Errors
-Clear node_modules and reinstall:
-```bash
-rm -rf node_modules package-lock.json
-npm install
-```
-
-## Contributing
-
-1. Create a feature branch
-2. Make your changes
-3. Test thoroughly
-4. Submit a pull request
+This will create an optimized production build in the `dist/` directory.
 
 ## License
 
-This project is proprietary and confidential.
+All Rights Reserved © 2026 Sportitude

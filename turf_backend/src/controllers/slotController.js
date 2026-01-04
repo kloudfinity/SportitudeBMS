@@ -30,64 +30,42 @@ exports.generateSlots = async (req, res) => {
   try {
     const { turfId, date, startTime, endTime } = req.body;
 
+    console.log("Generate Slots Request:", { turfId, date, startTime, endTime });
+
+    if (!turfId || !date || !startTime || !endTime) {
+      return res.status(400).json({ 
+        message: "All fields are required: turfId, date, startTime, endTime" 
+      });
+    }
+
     // Verify turf exists
     const turf = await Turf.findById(turfId);
     if (!turf) {
       return res.status(404).json({ message: "Turf not found" });
     }
 
-    // Delete existing slots for this turf and date
-    await Slot.deleteMany({ turf: turfId, date });
+    console.log("Turf found:", { name: turf.name });
 
-    // Generate time slots
-    const slots = [];
-    const slotDuration = turf.slotDurationMinutes;
-    const buffer = turf.bufferMinutes;
-    
-    let currentTime = startTime; // e.g., "06:00"
-    const endTimeParts = endTime.split(":");
-    const endMinutes = parseInt(endTimeParts[0]) * 60 + parseInt(endTimeParts[1]);
+    // Create a single slot
+    const slot = await Slot.create({
+      turf: turfId,
+      date,
+      startTime,
+      endTime,
+      status: "AVAILABLE"
+    });
 
-    while (true) {
-      const [hours, minutes] = currentTime.split(":").map(Number);
-      const currentMinutes = hours * 60 + minutes;
-      
-      if (currentMinutes >= endMinutes) break;
-
-      const nextMinutes = currentMinutes + slotDuration;
-      const nextHours = Math.floor(nextMinutes / 60);
-      const nextMins = nextMinutes % 60;
-      const nextTime = `${String(nextHours).padStart(2, "0")}:${String(nextMins).padStart(2, "0")}`;
-
-      if (nextMinutes > endMinutes) break;
-
-      slots.push({
-        turf: turfId,
-        date,
-        startTime: currentTime,
-        endTime: nextTime,
-        status: "AVAILABLE"
-      });
-
-      currentTime = nextTime;
-      
-      // Add buffer time
-      if (buffer > 0) {
-        const bufferMinutes = nextMinutes + buffer;
-        const bufferHours = Math.floor(bufferMinutes / 60);
-        const bufferMins = bufferMinutes % 60;
-        currentTime = `${String(bufferHours).padStart(2, "0")}:${String(bufferMins).padStart(2, "0")}`;
-      }
-    }
-
-    const createdSlots = await Slot.insertMany(slots);
+    console.log("Created slot:", slot);
     
     res.status(201).json({ 
-      message: "Slots generated successfully", 
-      count: createdSlots.length,
-      slots: createdSlots 
+      message: "Slot created successfully", 
+      slot
     });
   } catch (error) {
+    console.error("Slot creation error:", error);
+    if (error.code === 11000) {
+      return res.status(400).json({ message: "Slot already exists for this time" });
+    }
     res.status(500).json({ message: error.message });
   }
 };

@@ -1,0 +1,66 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+const Header = () => {
+  return (
+    <header>
+      <div className="container">
+        <div className="row justify-content-between align-items-center">
+          <div className="col-auto">
+            <img src="/assets/images/logo.png" alt="Logo" />
+          </div>
+
+          <div className="col-auto header-nav">
+            <nav className="navbar navbar-expand-lg">
+              <div className="container-fluid">
+                <button
+                  className="navbar-toggler"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#navbarText"
+                  aria-controls="navbarText"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
+                >
+                  <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarText">
+                  <ul className="navbar-nav me-auto mb-lg-0">
+                    <li className="nav-item">
+                      <a className="nav-link active" aria-current="page" href="#">
+                        Home
+                      </a>
+                    </li>
+                    <li className="nav-item">
+                      <a className="nav-link" href="#gallery">
+                        Gallery
+                      </a>
+                    </li>
+                    <li className="nav-item">
+                      <a className="nav-link" href="#coaching">
+                        Coaching
+                      </a>
+                    </li>
+                    <li className="nav-item">
+                      <a className="nav-link" href="#ratecard">
+                        Rate Card
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
+          </div>
+
+          <div className="col-auto header-btn-col">
+            <a href="#contact" className="btn btn-primary">
+              Contact Us
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default Header;
