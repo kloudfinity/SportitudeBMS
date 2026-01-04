@@ -20,7 +20,7 @@ function HomePage() {
 
 function AdminRedirect() {
   useEffect(() => {
-    window.location.href = 'http://localhost:3001';
+    window.location.href = 'https://sportitude-bms-admin.vercel.app';
   }, []);
 
   return (
