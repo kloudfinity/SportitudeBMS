@@ -27,9 +27,9 @@ const Header = () => {
                 <div className="collapse navbar-collapse" id="navbarText">
                   <ul className="navbar-nav me-auto mb-lg-0">
                     <li className="nav-item">
-                      <a className="nav-link active" aria-current="page" href="#">
+                      <Link className="nav-link" to="/">
                         Home
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
                       <a className="nav-link" href="#gallery">
@@ -37,14 +37,14 @@ const Header = () => {
                       </a>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link" href="#coaching">
+                      <Link className="nav-link" to="/coaching">
                         Coaching
-                      </a>
+                      </Link>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link" href="#ratecard">
+                      <Link className="nav-link" to="/rates">
                         Rate Card
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
@@ -53,9 +53,9 @@ const Header = () => {
           </div>
 
           <div className="col-auto header-btn-col">
-            <a href="#contact" className="btn btn-primary">
+            <Link to="/contact" className="btn btn-primary">
               Contact Us
-            </a>
+            </Link>
           </div>
         </div>
       </div>

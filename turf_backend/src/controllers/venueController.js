@@ -1,5 +1,6 @@
 const Venue = require("../models/Venue");
 const City = require("../models/City");
+const Turf = require("../models/Turf");
 
 // Get all venues
 exports.getAllVenues = async (req, res) => {
@@ -16,6 +17,54 @@ exports.getAllVenues = async (req, res) => {
       .sort({ name: 1 });
     
     res.json({ venues });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Get venues by city with turfs (Public)
+exports.getVenuesByCity = async (req, res) => {
+  try {
+    const { cityId } = req.params;
+    
+    if (!cityId) {
+      return res.status(400).json({ message: "City ID is required" });
+    }
+
+    // Verify city exists
+    const city = await City.findById(cityId);
+    if (!city) {
+      return res.status(404).json({ message: "City not found" });
+    }
+
+    // Get active venues in the city
+    const venues = await Venue.find({ 
+      city: cityId, 
+      isActive: true 
+    })
+    .populate("city", "name state")
+    .sort({ name: 1 });
+
+    // Get turfs for each venue
+    const venuesWithTurfs = await Promise.all(
+      venues.map(async (venue) => {
+        const turfs = await Turf.find({ 
+          venue: venue._id, 
+          isActive: true 
+        }).select('name sportType pricePerHour images amenities');
+        
+        return {
+          ...venue.toObject(),
+          turfs
+        };
+      })
+    );
+
+    res.json({ 
+      success: true,
+      city: city.name,
+      venues: venuesWithTurfs 
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

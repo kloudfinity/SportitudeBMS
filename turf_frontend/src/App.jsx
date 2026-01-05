@@ -6,6 +6,12 @@ import About from './components/About';
 import BookingForm from './components/BookingForm';
 import Gallery from './components/Gallery';
 import Footer from './components/Footer';
+import Coaching from './pages/Coaching';
+import RateCard from './pages/RateCard';
+import Contact from './pages/Contact';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import PaymentPolicy from './pages/PaymentPolicy';
+import UsagePolicy from './pages/UsagePolicy';
 
 function HomePage() {
   return (
@@ -20,7 +26,8 @@ function HomePage() {
 
 function AdminRedirect() {
   useEffect(() => {
-    window.location.href = 'https://sportitude-bms-admin.vercel.app';
+    const adminUrl = import.meta.env.VITE_ADMIN_URL || 'http://localhost:3002';
+    window.location.href = adminUrl;
   }, []);
 
   return (
@@ -40,6 +47,12 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/coaching" element={<Coaching />} />
+          <Route path="/rates" element={<RateCard />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/payment-policy" element={<PaymentPolicy />} />
+          <Route path="/usage-policy" element={<UsagePolicy />} />
           <Route path="/admin" element={<AdminRedirect />} />
         </Routes>
         <Footer />

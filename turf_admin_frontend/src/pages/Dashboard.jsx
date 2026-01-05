@@ -1,9 +1,45 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import api from '../api/axios';
 
 const Dashboard = ({ onLogout }) => {
   const navigate = useNavigate();
+  const [stats, setStats] = useState({
+    totalCities: 0,
+    totalVenues: 0,
+    totalTurfs: 0,
+    totalBookings: 0
+  });
+  const [loading, setLoading] = useState(true);
+
+  // Fetch dashboard stats on component mount
+  useEffect(() => {
+    fetchStats();
+  }, []);
+
+  const fetchStats = async () => {
+    try {
+      setLoading(true);
+      const response = await api.get('/api/stats/dashboard');
+      if (response.data.success) {
+        setStats(response.data.data);
+      }
+    } catch (error) {
+      console.error('Error fetching stats:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Failed to load dashboard statistics',
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const menuCards = [
     {
@@ -171,7 +207,13 @@ const Dashboard = ({ onLogout }) => {
           <div className="col-md-3">
             <div className="card border-0 shadow-sm" style={{ borderRadius: '15px' }}>
               <div className="card-body text-center p-4">
-                <h2 className="fw-bold mb-2" style={{ color: '#667eea' }}>0</h2>
+                {loading ? (
+                  <div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                ) : (
+                  <h2 className="fw-bold mb-2" style={{ color: '#667eea' }}>{stats.totalCities}</h2>
+                )}
                 <p className="text-muted mb-0">Total Cities</p>
               </div>
             </div>
@@ -179,7 +221,13 @@ const Dashboard = ({ onLogout }) => {
           <div className="col-md-3">
             <div className="card border-0 shadow-sm" style={{ borderRadius: '15px' }}>
               <div className="card-body text-center p-4">
-                <h2 className="fw-bold mb-2" style={{ color: '#764ba2' }}>0</h2>
+                {loading ? (
+                  <div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                ) : (
+                  <h2 className="fw-bold mb-2" style={{ color: '#764ba2' }}>{stats.totalVenues}</h2>
+                )}
                 <p className="text-muted mb-0">Total Venues</p>
               </div>
             </div>
@@ -187,7 +235,13 @@ const Dashboard = ({ onLogout }) => {
           <div className="col-md-3">
             <div className="card border-0 shadow-sm" style={{ borderRadius: '15px' }}>
               <div className="card-body text-center p-4">
-                <h2 className="fw-bold mb-2" style={{ color: '#f093fb' }}>0</h2>
+                {loading ? (
+                  <div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                ) : (
+                  <h2 className="fw-bold mb-2" style={{ color: '#f093fb' }}>{stats.totalTurfs}</h2>
+                )}
                 <p className="text-muted mb-0">Total Turfs</p>
               </div>
             </div>
@@ -195,7 +249,13 @@ const Dashboard = ({ onLogout }) => {
           <div className="col-md-3">
             <div className="card border-0 shadow-sm" style={{ borderRadius: '15px' }}>
               <div className="card-body text-center p-4">
-                <h2 className="fw-bold mb-2" style={{ color: '#43e97b' }}>0</h2>
+                {loading ? (
+                  <div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                ) : (
+                  <h2 className="fw-bold mb-2" style={{ color: '#43e97b' }}>{stats.totalBookings}</h2>
+                )}
                 <p className="text-muted mb-0">Total Bookings</p>
               </div>
             </div>

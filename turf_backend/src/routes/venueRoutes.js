@@ -6,6 +6,7 @@ const { requireAdmin } = require("../middlewares/role");
 
 // Public routes
 router.get("/", venueController.getAllVenues);
+router.get("/city/:cityId", venueController.getVenuesByCity);
 router.get("/:id", venueController.getVenueById);
 
 // Admin routes

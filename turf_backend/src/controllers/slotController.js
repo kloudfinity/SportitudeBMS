@@ -16,7 +16,7 @@ exports.getSlotsByDate = async (req, res) => {
       turf: turfId, 
       date 
     })
-    .populate("turf", "name pricePerHour")
+    .populate("turf", "name pricePerHour slotDurationMinutes")
     .sort({ startTime: 1 });
 
     res.json({ slots });
@@ -100,6 +100,117 @@ exports.deleteSlot = async (req, res) => {
     }
     res.json({ message: "Slot deleted successfully" });
   } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Get available slots by venue (Public)
+exports.getSlotsByVenue = async (req, res) => {
+  try {
+    const { venueId, date } = req.query;
+
+    if (!venueId || !date) {
+      return res.status(400).json({ 
+        message: "venueId and date are required" 
+      });
+    }
+
+    // Get all turfs in the venue
+    const turfs = await Turf.find({ 
+      venue: venueId, 
+      isActive: true 
+    }).select('_id name sportType');
+
+    if (turfs.length === 0) {
+      return res.json({ 
+        success: true,
+        slots: [],
+        message: "No turfs found for this venue"
+      });
+    }
+
+    const turfIds = turfs.map(t => t._id);
+
+    // Get available slots for all turfs
+    const slots = await Slot.find({
+      turf: { $in: turfIds },
+      date,
+      status: "AVAILABLE"
+    })
+    .populate("turf", "name sportType pricePerHour")
+    .sort({ startTime: 1 });
+
+    res.json({ 
+      success: true,
+      turfs,
+      slots 
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Bulk generate slots (Admin only)
+exports.bulkGenerateSlots = async (req, res) => {
+  try {
+    const { turfId, dates, timeSlots } = req.body;
+
+    if (!turfId || !dates || !timeSlots || dates.length === 0 || timeSlots.length === 0) {
+      return res.status(400).json({ 
+        message: "turfId, dates array, and timeSlots array are required" 
+      });
+    }
+
+    // Verify turf exists
+    const turf = await Turf.findById(turfId);
+    if (!turf) {
+      return res.status(404).json({ message: "Turf not found" });
+    }
+
+    const slotsToCreate = [];
+    const errors = [];
+
+    // Generate slots for each date and time slot combination
+    for (const date of dates) {
+      for (const timeSlot of timeSlots) {
+        try {
+          // Check if slot already exists
+          const existingSlot = await Slot.findOne({
+            turf: turfId,
+            date,
+            startTime: timeSlot.startTime,
+            endTime: timeSlot.endTime
+          });
+
+          if (!existingSlot) {
+            slotsToCreate.push({
+              turf: turfId,
+              date,
+              startTime: timeSlot.startTime,
+              endTime: timeSlot.endTime,
+              status: "AVAILABLE"
+            });
+          }
+        } catch (error) {
+          errors.push({ date, timeSlot, error: error.message });
+        }
+      }
+    }
+
+    // Bulk insert slots
+    const createdSlots = slotsToCreate.length > 0 
+      ? await Slot.insertMany(slotsToCreate) 
+      : [];
+
+    res.status(201).json({ 
+      success: true,
+      message: `${createdSlots.length} slots created successfully`,
+      createdCount: createdSlots.length,
+      skippedCount: (dates.length * timeSlots.length) - createdSlots.length,
+      errors: errors.length > 0 ? errors : undefined
+    });
+  } catch (error) {
+    console.error("Bulk slot creation error:", error);
     res.status(500).json({ message: error.message });
   }
 };

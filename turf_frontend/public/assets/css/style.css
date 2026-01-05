@@ -28,7 +28,7 @@ img {
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 4rem;
   font-weight: 500;
   line-height: 1.3;
   font-family: "Plus Jakarta Sans", sans-serif;
@@ -596,9 +596,6 @@ header .header-nav .navbar-nav li a.active {
 .book-court-section .court-form-area .booking-form-area .ground-part .time-slot-main .form-check input:checked[type=radio] + label {
   background-color: #08295E;
 }
-.book-court-section .court-form-area .booking-form-area .ground-part .time-slot-main .form-check input:checked[type=checkbox] + label {
-  background-color: #08295E;
-}
 .book-court-section .court-form-area .booking-form-area .ground-part .time-slot-main .form-check input:checked + label, .book-court-section .court-form-area .booking-form-area .ground-part .time-slot-main .form-check input:checked[type=radio] + label span {
   color: #fff;
 }
@@ -631,6 +628,244 @@ header .header-nav .navbar-nav li a.active {
   border-radius: 6px;
   border: 1px solid #08295E;
   padding: 20px;
+}
+
+.inner-banner-section {
+  height: 400px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.inner-banner-section .image-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.inner-banner-section .image-area img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.inner-banner-section .content-area {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  margin-top: 60px;
+}
+.inner-banner-section .content-area h1 {
+  font-size: 4rem;
+  font-weight: 900;
+  margin-bottom: 25px;
+}
+.inner-banner-section .content-area p {
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+.rev-section {
+  text-align: center;
+}
+.rev-section h2 {
+  margin-bottom: 30px;
+}
+.rev-section p {
+  max-width: 700px;
+  margin: 0 auto 30px;
+  color: #535353;
+  margin-bottom: 35px;
+}
+
+.coach-section {
+  background-color: #F8F5EB;
+}
+.coach-section .heading-part {
+  margin-bottom: 40px;
+}
+.coach-section .coach-box {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 3px 3px 0 3px #08295E;
+  padding: 15px;
+  border: 1px solid #08295E;
+}
+.coach-section .coach-box .head span {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  color: #08295E;
+  margin-left: 5px;
+  text-transform: uppercase;
+}
+.coach-section .coach-box .image-area {
+  display: block;
+  margin: 15px 0;
+}
+.coach-section .coach-box .image-area img {
+  border-radius: 6px;
+}
+.coach-section .coach-box h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #08295E;
+  margin-bottom: 6px;
+}
+.coach-section .coach-box h6 {
+  font-size: 13px;
+  font-weight: 500;
+  color: #535353;
+  margin-bottom: 15px;
+}
+.coach-section .coach-box .info-list {
+  margin: 0;
+}
+.coach-section .coach-box .info-list li {
+  margin-bottom: 8px;
+  color: #08295E;
+  font-size: 14px;
+}
+.coach-section .coach-box .info-list li i {
+  margin-right: 8px;
+  color: #AADF6D;
+}
+.coach-section .coach-box a.btn {
+  width: 100%;
+  padding: 8px 20px 8px 45px;
+  font-size: 15px;
+  margin-top: 15px;
+}
+
+.pricing-section .heading-part {
+  margin-bottom: 45px;
+}
+.pricing-section .rate-card {
+  margin: 0;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 3px 3px 0 3px #08295E;
+  padding: 0;
+  border: 1px solid #08295E;
+  overflow: hidden;
+}
+.pricing-section .rate-card hr {
+  margin: 20px 0;
+  border-top: 1px solid #949494;
+}
+.pricing-section .rate-card .card-header {
+  background-color: #AADF6D;
+  text-align: center;
+  margin: 0;
+  padding: 25px 20px;
+}
+.pricing-section .rate-card .card-header > * {
+  color: #08295E;
+}
+.pricing-section .rate-card .card-header h5 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.pricing-section .rate-card .card-header h6 {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+.pricing-section .rate-card .card-header p {
+  font-size: 15px;
+  margin-bottom: 0px;
+}
+.pricing-section .rate-card .card-body {
+  margin: 0;
+  padding: 25px 15px;
+  border: 0;
+}
+.pricing-section .rate-card .card-body h5 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0;
+}
+.pricing-section .rate-card .card-body h5 span {
+  color: #535353;
+  font-size: 16px;
+  font-weight: 500;
+}
+.pricing-section .rate-card .card-body h5 span + span {
+  font-size: 16px;
+  font-weight: 700;
+  color: #08295E;
+}
+.pricing-section .rate-card .card-body h5:not(:last-child) {
+  margin-bottom: 4px;
+}
+.pricing-section .rate-card .card-body .text-center h6 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #08295E;
+}
+.pricing-section .rate-card .card-body .text-center p {
+  font-size: 15px;
+  line-height: 1.4;
+  font-weight: 400;
+  margin-bottom: 15px;
+  color: #535353;
+}
+.pricing-section .rate-card .card-body ul {
+  margin-bottom: 0;
+}
+.pricing-section .rate-card .card-body ul li {
+  font-size: 15px;
+  color: #535353;
+  margin-bottom: 6px;
+}
+.pricing-section .rate-card .card-body ul li i {
+  margin-right: 8px;
+  color: #AADF6D;
+}
+.pricing-section .rate-card .card-body ul {
+  padding: 0;
+  margin: 0 0 20px;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.pricing-section .rate-card .card-body ul li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 1.2;
+  width: 48%;
+}
+.pricing-section .rate-card .card-body ul li:before {
+  content: "\f00c";
+  font-family: fontAwesome;
+  position: absolute;
+  left: 0;
+  top: 1px;
+  color: #69be08;
+}
+.pricing-section .rate-card .card-body a.btn {
+  width: 100%;
+  padding: 8px 20px 8px 45px;
+  font-size: 15px;
+  margin-top: 0px;
+}
+.pricing-section .rate-card:hover {
+  background: #f5f5f5;
+  transition: 0.4s;
+}
+.pricing-section .rate-card:hover .card-header {
+  background-color: #08295E;
+}
+.pricing-section .rate-card:hover .card-header > * {
+  color: #fff;
 }
 
 footer {
@@ -676,13 +911,40 @@ footer .top-area .social-icon li a:hover i {
 }
 footer .copyright-area {
   border-top: 1px solid #2C4772;
-  padding: 15px 0;
-  text-align: center;
+  padding: 30px 0;
 }
 footer .copyright-area p {
   color: #fff;
   margin: 0;
   font-size: 13px;
+}
+footer .copyright-area .footer-heading {
+  color: #A6CE39;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+footer .copyright-area .footer-contact {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+footer .copyright-area .footer-contact li {
+  margin-bottom: 10px;
+}
+footer .copyright-area .footer-contact li a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+footer .copyright-area .footer-contact li a:hover {
+  color: #A6CE39;
+}
+footer .copyright-area .footer-contact li a i {
+  font-size: 1rem;
 }
 
 /* ===================================== ANIMATION AREA ============================================== */
@@ -710,6 +972,11 @@ footer .copyright-area p {
 @media screen and (min-device-width: 1400px) and (max-device-width: 1599px) {
   .container {
     max-width: 1400px;
+  }
+}
+@media only screen and (max-width: 1599px) {
+  .heading-part h2 {
+    font-size: 4rem;
   }
 }
 @media all and (max-width: 991px) {
@@ -772,6 +1039,25 @@ footer .copyright-area p {
   }
 }
 @media only screen and (max-width: 575px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 2.1rem;
+  }
+  .header-logo img {
+    max-width: 200px;
+  }
+  .inner-banner-section .image-area img {
+    -o-object-position: left center;
+       object-position: left center;
+  }
+  .inner-banner-section .content-area h1 {
+    font-size: 2.5rem;
+  }
+  .inner-banner-section .content-area p {
+    font-size: 0.825rem;
+  }
   .banner-section .banner-area h1 {
     font-size: 2.2rem;
   }
@@ -831,5 +1117,21 @@ footer .copyright-area p {
   }
   .about-section .about-item .icon-area i {
     font-size: 22px;
+  }
+  footer {
+    padding: 3rem 0 0;
+  }
+  footer .top-area img {
+    max-width: 200px;
+  }
+  footer .top-area .contact {
+    margin: 35px 0 25px;
+    gap: 0px;
+  }
+  footer .top-area ul.social-icon {
+    gap: 10px;
+  }
+  .pricing-section .heading-part {
+    margin-bottom: 25px;
   }
 }/*# sourceMappingURL=style.css.map */

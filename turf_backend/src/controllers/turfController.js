@@ -180,3 +180,74 @@ exports.deleteTurf = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// Get turfs by sport type (Public)
+exports.getTurfsBySportType = async (req, res) => {
+  try {
+    const { sportType } = req.params;
+    const { cityId } = req.query;
+
+    const filter = { 
+      sportType, 
+      isActive: true 
+    };
+
+    let turfs = await Turf.find(filter)
+      .populate({
+        path: "venue",
+        populate: { path: "city", select: "name" }
+      })
+      .sort({ name: 1 });
+
+    // Filter by city if provided
+    if (cityId) {
+      turfs = turfs.filter(turf => turf.venue?.city?._id?.toString() === cityId);
+    }
+
+    res.json({ 
+      success: true,
+      sportType,
+      count: turfs.length,
+      turfs 
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Get turf details with available slots (Public)
+exports.getTurfWithSlots = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { date } = req.query;
+
+    const turf = await Turf.findById(id)
+      .populate({
+        path: "venue",
+        populate: { path: "city", select: "name state" }
+      });
+
+    if (!turf) {
+      return res.status(404).json({ message: "Turf not found" });
+    }
+
+    // Get available slots for the date if provided
+    let availableSlots = [];
+    if (date) {
+      const Slot = require("../models/Slot");
+      availableSlots = await Slot.find({
+        turf: id,
+        date,
+        status: "AVAILABLE"
+      }).sort({ startTime: 1 });
+    }
+
+    res.json({ 
+      success: true,
+      turf,
+      availableSlots 
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

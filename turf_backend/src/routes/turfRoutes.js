@@ -7,6 +7,8 @@ const upload = require("../middlewares/upload");
 
 // Public routes
 router.get("/", turfController.getAllTurfs);
+router.get("/sport/:sportType", turfController.getTurfsBySportType);
+router.get("/:id/slots", turfController.getTurfWithSlots);
 router.get("/:id", turfController.getTurfById);
 
 // Admin routes

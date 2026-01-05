@@ -64,6 +64,10 @@ app.use("/api/slots", slotRoutes)
 const bookingRoutes = require("./routes/bookingRoutes")
 app.use("/api/bookings", bookingRoutes)
 
+// Stats routes
+const statsRoutes = require("./routes/statsRoutes")
+app.use("/api/stats", statsRoutes)
+
 // Test purpose
 const adminTestRoutes = require("./routes/adminTestRoutes")
 app.use("/api/admin/test", adminTestRoutes)
