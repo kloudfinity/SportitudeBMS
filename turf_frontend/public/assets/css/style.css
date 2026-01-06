@@ -348,12 +348,22 @@ input:focus {
 
 /*	------ HEADER PART ------  */
 header {
-  position: absolute;
+  position: fixed;
   width: 100%;
   top: 0;
   left: 0;
   z-index: 9999;
   padding: 10px 0;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transition: all 0.3s ease;
+}
+header.scrolled {
+  background: rgba(8, 41, 94, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 header .header-nav .navbar-nav {
   gap: 25px;
@@ -414,7 +424,7 @@ header .header-nav .navbar-nav li a.active {
   right: 0;
   width: 80%;
   height: 300px;
-  background: url(../images/logo.png) center center no-repeat;
+  /* background: url(../images/logo.png) center center no-repeat; */
   background-size: contain;
   opacity: 1;
   z-index: 1;

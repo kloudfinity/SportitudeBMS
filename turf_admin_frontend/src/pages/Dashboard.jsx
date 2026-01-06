@@ -107,10 +107,18 @@ const Dashboard = ({ onLogout }) => {
     <div className="dashboard-page" style={{ minHeight: '100vh', background: '#f8f9fa' }}>
       {/* Header */}
       <header style={{
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%)',
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
         color: 'white',
         padding: '20px 0',
-        boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
+        boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        width: '100%',
+        zIndex: 9999
       }}>
         <div className="container">
           <div className="d-flex justify-content-between align-items-center">
@@ -129,6 +137,9 @@ const Dashboard = ({ onLogout }) => {
           </div>
         </div>
       </header>
+
+      {/* Spacer for fixed header */}
+      <div style={{ height: '80px' }}></div>
 
       {/* Dashboard Content */}
       <div className="container py-5">

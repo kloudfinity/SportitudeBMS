@@ -30,35 +30,46 @@ const AdminHeader = ({ title, onLogout }) => {
   };
 
   return (
-    <header style={{
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-      color: 'white',
-      padding: '20px 0',
-      boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
-    }}>
-      <div className="container">
-        <div className="d-flex justify-content-between align-items-center">
-          <div>
-            <button 
-              onClick={() => navigate('/dashboard')}
-              className="btn btn-link text-white text-decoration-none p-0 me-3"
+    <>
+      <header style={{
+        background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%)',
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
+        color: 'white',
+        padding: '20px 0',
+        boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        width: '100%',
+        zIndex: 9999
+      }}>
+        <div className="container">
+          <div className="d-flex justify-content-between align-items-center">
+            <div>
+              <button 
+                onClick={() => navigate('/dashboard')}
+                className="btn btn-link text-white text-decoration-none p-0 me-3"
+              >
+                <i className="fas fa-arrow-left me-2"></i>
+                Back to Dashboard
+              </button>
+              <h2 className="mb-0 fw-bold d-inline-block">{title}</h2>
+            </div>
+            <button
+              onClick={handleLogoutClick}
+              className="btn btn-light"
+              style={{ borderRadius: '25px', padding: '10px 30px' }}
             >
-              <i className="fas fa-arrow-left me-2"></i>
-              Back to Dashboard
+              <i className="fas fa-sign-out-alt me-2"></i>
+              Logout
             </button>
-            <h2 className="mb-0 fw-bold d-inline-block">{title}</h2>
           </div>
-          <button
-            onClick={handleLogoutClick}
-            className="btn btn-light"
-            style={{ borderRadius: '25px', padding: '10px 30px' }}
-          >
-            <i className="fas fa-sign-out-alt me-2"></i>
-            Logout
-          </button>
         </div>
-      </div>
-    </header>
+      </header>
+      <div style={{ height: '80px' }}></div>
+    </>
   );
 };
 
