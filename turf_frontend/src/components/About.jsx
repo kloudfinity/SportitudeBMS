@@ -21,7 +21,7 @@ const About = () => {
           <polyline points="12 6 12 12 16 14"></polyline>
         </svg>
       ),
-      title: '24/7 Availability',
+      title: 'Wide Availability',
       description: 'Access our facilities any time that suits you best'
     },
     {
