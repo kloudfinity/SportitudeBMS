@@ -11,7 +11,7 @@ const BookingForm = () => {
     return `${year}-${month}-${day}`;
   };
 
-  const [activeGame, setActiveGame] = useState('FOOTBALL');
+  const [activeGame, setActiveGame] = useState('CRICKET');
   const [showModal, setShowModal] = useState(false);
   const [cities, setCities] = useState([]);
   const [allVenues, setAllVenues] = useState([]);
@@ -29,10 +29,11 @@ const BookingForm = () => {
   });
 
   const games = [
-    { id: 'FOOTBALL', name: 'Football', icon: '/assets/images/g1.png' },
     { id: 'CRICKET', name: 'Cricket', icon: '/assets/images/g2.png' },
+    { id: 'FOOTBALL', name: 'Football', icon: '/assets/images/g1.png' },
     { id: 'PICKLEBALL', name: 'Pickleball', icon: '/assets/images/g3.png' },
-    { id: 'PAINTBALL', name: 'Paintball', icon: '/assets/images/g4.png' }
+    { id: 'BADMINTON', name: 'Badminton', icon: '/assets/images/g4.png' },
+    { id: 'TENNIS', name: 'Tennis', icon: '/assets/images/g4.png' }
   ];
 
   // Fetch cities on mount

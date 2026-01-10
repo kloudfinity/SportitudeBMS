@@ -6,6 +6,7 @@ import About from './components/About';
 import BookingForm from './components/BookingForm';
 import Gallery from './components/Gallery';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 import Coaching from './pages/Coaching';
 import RateCard from './pages/RateCard';
 import Contact from './pages/Contact';
@@ -43,6 +44,7 @@ function AdminRedirect() {
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="wrapper">
         <Header />
         <Routes>

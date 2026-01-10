@@ -1,7 +1,29 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 const Header = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleGalleryClick = (e) => {
+    e.preventDefault();
+    if (location.pathname !== '/') {
+      // Navigate to home page, then scroll to gallery
+      navigate('/');
+      setTimeout(() => {
+        const gallerySection = document.getElementById('gallery');
+        if (gallerySection) {
+          gallerySection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      // Already on home page, just scroll
+      const gallerySection = document.getElementById('gallery');
+      if (gallerySection) {
+        gallerySection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
   return (
     <header>
       <div className="container">
@@ -32,7 +54,11 @@ const Header = () => {
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link" href="#gallery">
+                      <a 
+                        className="nav-link" 
+                        href="#gallery"
+                        onClick={handleGalleryClick}
+                      >
                         Gallery
                       </a>
                     </li>

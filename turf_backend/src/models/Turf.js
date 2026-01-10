@@ -11,7 +11,7 @@ const turfSchema = new mongoose.Schema({
 
   sportType: {
     type: String,
-    enum: ["CRICKET", "FOOTBALL", "BADMINTON", "BASKETBALL", "PICKLEBALL"],
+    enum: ["CRICKET", "FOOTBALL", "PICKLEBALL", "BADMINTON", "TENNIS"],
     required: true
   },
 
