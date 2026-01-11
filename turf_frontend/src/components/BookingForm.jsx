@@ -32,8 +32,8 @@ const BookingForm = () => {
     { id: 'CRICKET', name: 'Cricket', icon: '/assets/images/g2.png' },
     { id: 'FOOTBALL', name: 'Football', icon: '/assets/images/g1.png' },
     { id: 'PICKLEBALL', name: 'Pickleball', icon: '/assets/images/g3.png' },
-    { id: 'BADMINTON', name: 'Badminton', icon: '/assets/images/g4.png' },
-    { id: 'TENNIS', name: 'Tennis', icon: '/assets/images/g4.png' }
+    { id: 'BADMINTON', name: 'Badminton', icon: '/assets/images/g5.png' },
+    { id: 'TENNIS', name: 'Tennis', icon: '/assets/images/g6.png' }
   ];
 
   // Fetch cities on mount
@@ -340,11 +340,6 @@ const BookingForm = () => {
                               </label>
                             </div>
                           </div>
-                        </div>
-
-                        <div className="col-auto rate-hd">
-                          <h4>₹5000/hr(Weekdays)</h4>
-                          <h4>₹6000/hr(Weekends)</h4>
                         </div>
                       </div>
 
